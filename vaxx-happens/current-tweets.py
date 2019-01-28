@@ -14,8 +14,19 @@ import json
 import pandas as pd
 import credentials
 
+
+
 auth = tweepy.OAuthHandler(credentials.CONSUMER_KEY, credentials.CONSUMER_SECRET)
 auth.set_access_token(credentials.ACCESS_KEY, credentials.ACCESS_SECRET)
 
-api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+api = tweepy.API(auth, wait_on_rate_limit=True, 
+                 wait_on_rate_limit_notify=True)
 
+tweet_dict = {}
+for tweet in tweepy.Cursor(api.search, q='vaccine -filter:retweets -filter:replies', 
+                           lang='en', tweet_mode='extended', result_type='recent',
+                    geocode='45.7669047,-122.4940866,50mi').items(10):
+    t_id = tweet.id_str
+    tweet_dict[t_id] = tweet.full_text
+    
+print(tweet_dict)
