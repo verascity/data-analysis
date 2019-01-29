@@ -13,19 +13,19 @@ import tweepy
 import pandas as pd
 import credentials
 
+pd.set_option('display.max_colwidth', -1)
 
-def dict_from_api(query, geocode=None, limit=100):
+def dict_from_api(query, geocode=None, limit=1000):
     
     tweet_dict = {}
-    
-    try:
-        tweets = tweepy.Cursor(api_setup().search, q=query, lang='en', 
-    tweet_mode='extended', result_type='recent', geocode=geocode).items(limit)
-    except tweepy.TweepError as err:
-        print(err.api_code)
-    
-    for tweet in tweets:    
-        tweet_dict[tweet.id_str] = tweet.full_text
+    for tweet in tweepy.Cursor(api_setup().search, q=query, 
+    lang='en', tweet_mode='extended', result_type='recent',
+    geocode=geocode).items(limit):
+        
+        try: 
+            tweet_dict[tweet.id_str] = tweet.full_text
+        except tweepy.TweepError as err:
+            print(err.api_code)
         
     return tweet_dict
 
@@ -40,9 +40,8 @@ def api_setup():
     
     return api
 
-
-    
-print(dict_from_api('vaccine -filter:retweets -filter:replies', 
-                    geocode='45.7669047,-122.4940866,50mi', 
-                    limit=2))
-
+if __name__ == "__main__":
+    vaccine_dict = dict_from_api('vaccine -filter:retweets', 
+                    geocode='45.7669047,-122.4940866,300mi')
+    vaccine_df = pd.DataFrame.from_dict(vaccine_dict, orient='index')
+    vaccine_df.columns = ['text']
