@@ -54,7 +54,7 @@ if __name__ == "__main__":
     vaccine_df = strip_all(vaccine_df)
 #    vaccine_df = lemmatize(vaccine_df)
     tknzr = RegexpTokenizer('\w+')
-    cvec = CountVectorizer(lowercase=True, stop_words="english", ngram_range = (1,1),
+    cvec = CountVectorizer(lowercase=True, stop_words="english", ngram_range = (2,2),
                            tokenizer = tknzr.tokenize)
     dtm = cvec.fit_transform(vaccine_df['text_clean'])
 
