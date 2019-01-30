@@ -12,6 +12,11 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 
+def strip_non_words(df):
+    tknzr = RegexpTokenizer('\w+')
+    df['text_clean'] = df['text_clean'].apply(tknzr.tokenize)
+    return df
+
 def strip_links(df):
     df['text_clean'] = df['text_clean'].replace(r'https:\S+', '', regex=True)
     return df
@@ -28,8 +33,6 @@ def create_clean_text_col(df):
 
 vaccine_df = strip_user_names(vaccine_df)
 vaccine_df = strip_links(vaccine_df)
+vaccine_df = strip_non_words(vaccine_df)
 
-#tknzr = RegexpTokenizer('\w+')
-#vaccine_df.text_clean = vaccine_df.text_clean.apply(tknzr.tokenize)
-
-print(vaccine_df.text_clean.head())
+print(vaccine_df.text_clean[0][0])
