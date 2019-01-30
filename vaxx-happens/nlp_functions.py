@@ -7,10 +7,11 @@ analysis. It uses the NLTK library to identify Tweet text as either pro- or
 anti-vaccination using a Naive Bayes classifier.
 """
 
-import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
 
 def lemmatize(df):
     wnl = WordNetLemmatizer()
@@ -20,9 +21,9 @@ def lemmatize(df):
 def strip_all(df):
     df = strip_user_names(df)
     df = strip_links(df)
-    df['text_clean'] = df['text_clean'].str.lower()  
-    df = strip_non_words(df) 
-    df = strip_stopwords(df) 
+#    df['text_clean'] = df['text_clean'].str.lower()  
+#    df = strip_non_words(df) 
+#    df = strip_stopwords(df) 
     return df
 
 def strip_stopwords(df):
@@ -51,6 +52,10 @@ def create_clean_text_col(df):
 
 if __name__ == "__main__":
     vaccine_df = strip_all(vaccine_df)
-    vaccine_df = lemmatize(vaccine_df)
+#    vaccine_df = lemmatize(vaccine_df)
+    tknzr = RegexpTokenizer('\w+')
+    cvec = CountVectorizer(lowercase=True, stop_words="english", ngram_range = (1,1),
+                           tokenizer = tknzr.tokenize)
+    dtm = cvec.fit_transform(vaccine_df['text_clean'])
 
-    print(vaccine_df.text_clean.head())
+    print(cvec.get_feature_names())
