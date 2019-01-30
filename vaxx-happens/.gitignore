@@ -1,2 +1,3 @@
 credentials.py
 .spyproject
+__pycache__
