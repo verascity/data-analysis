@@ -45,3 +45,4 @@ if __name__ == "__main__":
 #                    geocode='45.7669047,-122.4940866,300mi')
     vaccine_df = pd.DataFrame.from_dict(vaccine_dict, orient='index')
     vaccine_df.columns = ['text']
+    vaccine_df.to_csv('vaccine_df_01312019.csv')
