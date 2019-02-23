@@ -11,29 +11,17 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 def lemmatize(df):
     wnl = WordNetLemmatizer()
-    df['text_clean'] = df['text_clean'].apply(lambda x: [wnl.lemmatize(w) for w in x])
+    df['text_clean'] = (df['text_clean'].apply(lambda x: [wnl.lemmatize(w) for w in x.split(' ')])
+                                        .apply(lambda x: ' '.join(x)))
     return df
 
 def strip_all(df):
     df = strip_user_names(df)
     df = strip_links(df)
-#    df['text_clean'] = df['text_clean'].str.lower()  
-#    df = strip_non_words(df) 
-#    df = strip_stopwords(df) 
-    return df
-
-def strip_stopwords(df):
-    stop_words = stopwords.words('english')
-    df['text_clean'] = df['text_clean'].apply(lambda x: [w for w in x if w not in stop_words])
-    return df
-
-def strip_non_words(df):
-    tknzr = RegexpTokenizer('\w+')
-    df['text_clean'] = df['text_clean'].apply(tknzr.tokenize)
     return df
 
 def strip_links(df):
@@ -52,10 +40,12 @@ def create_clean_text_col(df):
 
 if __name__ == "__main__":
     vaccine_df = strip_all(vaccine_df)
-#    vaccine_df = lemmatize(vaccine_df)
+    vaccine_df = lemmatize(vaccine_df)
     tknzr = RegexpTokenizer('\w+')
-    cvec = CountVectorizer(lowercase=True, stop_words="english", ngram_range = (1,2),
+    vec = TfidfVectorizer(lowercase=True, stop_words="english",
                            tokenizer = tknzr.tokenize)
-    dtm = cvec.fit_transform(vaccine_df['text_clean'])
+    dtm = vec.fit_transform(vaccine_df['text_clean'])
+    vec_df = pd.DataFrame(dtm.toarray(), columns=vec.get_feature_names())
 
-    print(cvec.get_feature_names())
+    print(vec.get_feature_names())
+ #   print(vaccine_df['text_clean'])
