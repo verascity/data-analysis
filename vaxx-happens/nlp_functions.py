@@ -10,7 +10,11 @@ anti-vaccination using a Naive Bayes classifier.
 from nltk.tokenize import RegexpTokenizer
 from nltk.stem.snowball import SnowballStemmer
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score
+
 
 def stemmer(df):
     stemmer = SnowballStemmer('english')
@@ -39,26 +43,15 @@ def create_clean_text_col(df):
 if __name__ == "__main__":
     vaccine_df = strip_all(vaccine_df)
     vaccine_df = stemmer(vaccine_df)
+    X_train, X_test, y_train, y_test = train_test_split(vaccine_df['text_clean'],
+                                                        vaccine_df['status'],
+                                                        test_size = 0.33)
     tknzr = RegexpTokenizer('\w+')
-    vec = TfidfVectorizer(stop_words="english",
+    cvec = CountVectorizer(lowercase=True, stop_words="english",
                            tokenizer = tknzr.tokenize)
-    dtm = vec.fit_transform(vaccine_df['text_clean'])
-    vec_df = pd.DataFrame(dtm.toarray(), columns=vec.get_feature_names())
-
-    print(vec.get_feature_names())
- #   print(vaccine_df['text_clean'])
-    
-    
-    
-    
-    
-    
-    
-#    X_train, X_test, y_train, y_test = train_test_split(vaccine_df['text_clean'],
-#                                                        vaccine_df['status'],
-#                                                        test_size = 0.33)
-#    tknzr = RegexpTokenizer('\w+')
-#    vec = TfidfVectorizer(lowercase=True, stop_words="english",
-#                           tokenizer = tknzr.tokenize)
-#    bow = vec.fit_transform(vaccine_df['text_clean'])
-#    vec_df = pd.DataFrame(bow.toarray(), columns=vec.get_feature_names())
+    X_train_counts = cvec.fit_transform(X_train)
+    tfidf_t = TfidfTransformer()
+    X_train_tfidf = tfidf_t.fit_transform(X_train_counts)
+    clf = MultinomialNB().fit(X_train_tfidf, y_train)
+    y_pred = clf.predict(cvec.transform(X_test))
+    print(accuracy_score(y_test, y_pred))
