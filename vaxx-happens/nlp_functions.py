@@ -15,7 +15,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 
-
 def stemmer(df):
     stemmer = SnowballStemmer('english')
     df['text_clean'] = df['text_clean'].apply(lambda x: ' '.join([stemmer.stem(w) for w in x.split(' ')]))
@@ -47,10 +46,12 @@ if __name__ == "__main__":
                                                         vaccine_df['status'],
                                                         test_size = 0.33)
     tknzr = RegexpTokenizer('\w+')
-    cvec = CountVectorizer(lowercase=True, stop_words="english",
+    cvec = CountVectorizer(lowercase=True, strip_accents = 'unicode', 
+                           stop_words="english", min_df = 0.01,
+                           max_df = 0.95, 
                            tokenizer = tknzr.tokenize)
     X_train_counts = cvec.fit_transform(X_train)
-    tfidf_t = TfidfTransformer()
+    tfidf_t = TfidfTransformer(use_idf=True)
     X_train_tfidf = tfidf_t.fit_transform(X_train_counts)
     clf = MultinomialNB().fit(X_train_tfidf, y_train)
     y_pred = clf.predict(cvec.transform(X_test))
