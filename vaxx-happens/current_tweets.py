@@ -42,7 +42,8 @@ def api_setup():
 
 if __name__ == "__main__":
 #    vaccine_dict = dict_from_api('vaccine -filter:retweets', 
-#                    geocode='45.7669047,-122.4940866,300mi')
+#                    geocode='49.282729,-123.120738,300mi')
     vaccine_df = pd.DataFrame.from_dict(vaccine_dict, orient='index')
     vaccine_df.columns = ['text']
-    vaccine_df.to_csv('vaccine_df_01312019.csv')
+    vaccine_df['status'] = ' '
+    vaccine_df.to_csv('vaccine_df_02242019.csv')
