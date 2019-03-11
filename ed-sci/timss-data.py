@@ -1,26 +1,24 @@
 """
-This script will compare reported worldwide enrollment in early childhood education,  
-from 2005-2016 (per UNICEF), with 8th grade science scores on the TIMSS 2015, to provide evidence
-towards an answer to the question: Does early childhood education boost science achievement?
+This script will compare reported worldwide enrollment and government expenditure
+in early childhood education from 2009-2017 with with science scores 
+on the Programme for International Assessment 2009, 2012, and 2015, as well as
+tertiary enrollment in science programs 2009-2017 (all via the World Bank database), 
+to provide evidence towards answering the question: Does early childhood 
+education boost science achievement on a global basis?
 """
 
 import pandas as pd
 
-early_ed = pd.read_csv('net_enrollment.csv', na_values='..', 
-                       header=None).dropna(thresh=11)
-exp = pd.read_csv('expenditures.csv', na_values='..',
-                  header=None).dropna(thresh=11)
-timss = pd.read_csv('timss2015.csv')
+early_ed = pd.read_csv('net_enrollment.csv', na_values='..').dropna(thresh=8)
+exp = pd.read_csv('expenditures.csv', na_values='..').dropna(thresh=8)
+pisa = pd.read_csv('pisa_mean.csv', na_values='..').dropna(thresh=3)
+stem_grads = pd.read_csv('stem_grads.csv', na_values='..').dropna(thresh=8)
+nsms_grads = pd.read_csv('nsms_grads.csv', na_values='..').dropna(thresh=8)
 
-#Some cleaning:
-col_names = ['country', 'country_code', '2005', '2006', '2007', '2008', 
-               '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', 
-               'avg_over_time']
-early_ed.columns = col_names
-exp.columns = col_names
-timss.columns = timss.columns.str.replace('Education System',
-                                          'country')
-timss = timss.rename(str.lower, axis='columns')
+sci_grads = stem_grads.copy()
+sci_grads.iloc[:, 2:8].add(nsms_grads.iloc[:, 2:8])
 
-early_ed_and_timss = pd.merge(early_ed, timss, how='inner', on='country')
-exp_and_timss = pd.merge(exp, timss, how='inner', on='country')
+early_ed_and_pisa = pd.merge(early_ed, pisa, how='inner', on=['country', 'country_code'])
+exp_and_pisa = pd.merge(exp, pisa, how='inner', on=['country', 'country_code'])
+early_ed_and_grads = pd.merge(early_ed, sci_grads, how='inner', on=['country', 'country_code'])
+exp_and_grads = pd.merge(exp, sci_grads, how='inner', on=['country', 'country_code'])

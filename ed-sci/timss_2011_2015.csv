@@ -1,0 +1,218 @@
+country,country_code,2011,2015
+Afghanistan,AFG,..,..
+Albania,ALB,..,..
+Algeria,DZA,..,..
+American Samoa,ASM,..,..
+Andorra,AND,..,..
+Angola,AGO,..,..
+Antigua and Barbuda,ATG,..,..
+Argentina,ARG,..,..
+Armenia,ARM,436.924651660779,..
+Aruba,ABW,..,..
+Australia,AUS,519,512
+Austria,AUT,..,..
+Azerbaijan,AZE,..,..
+"Bahamas, The",BHS,..,..
+Bahrain,BHR,452,466
+Bangladesh,BGD,..,..
+Barbados,BRB,..,..
+Belarus,BLR,..,..
+Belgium,BEL,..,..
+Belize,BLZ,..,..
+Benin,BEN,..,..
+Bermuda,BMU,..,..
+Bhutan,BTN,..,..
+Bolivia,BOL,..,..
+Bosnia and Herzegovina,BIH,..,..
+Botswana,BWA,..,..
+Brazil,BRA,..,..
+British Virgin Islands,VGB,..,..
+Brunei Darussalam,BRN,..,..
+Bulgaria,BGR,..,..
+Burkina Faso,BFA,..,..
+Burundi,BDI,..,..
+Cabo Verde,CPV,..,..
+Cambodia,KHM,..,..
+Cameroon,CMR,..,..
+Canada,CAN,..,526
+Cayman Islands,CYM,..,..
+Central African Republic,CAF,..,..
+Chad,TCD,..,..
+Channel Islands,CHI,..,..
+Chile,CHL,461,454
+China,CHN,..,..
+Colombia,COL,..,..
+Comoros,COM,..,..
+"Congo, Dem. Rep.",COD,..,..
+"Congo, Rep.",COG,..,..
+Costa Rica,CRI,..,..
+Cote d'Ivoire,CIV,..,..
+Croatia,HRV,..,..
+Cuba,CUB,..,..
+Curacao,CUW,..,..
+Cyprus,CYP,..,..
+Czech Republic,CZE,..,..
+Denmark,DNK,..,..
+Djibouti,DJI,..,..
+Dominica,DMA,..,..
+Dominican Republic,DOM,..,..
+Ecuador,ECU,..,..
+"Egypt, Arab Rep.",EGY,..,371
+El Salvador,SLV,..,..
+Equatorial Guinea,GNQ,..,..
+Eritrea,ERI,..,..
+Estonia,EST,..,..
+Eswatini,SWZ,..,..
+Ethiopia,ETH,..,..
+Faroe Islands,FRO,..,..
+Fiji,FJI,..,..
+Finland,FIN,552.352299842508,..
+France,FRA,..,..
+French Polynesia,PYF,..,..
+Gabon,GAB,..,..
+"Gambia, The",GMB,..,..
+Georgia,GEO,420,443
+Germany,DEU,..,..
+Ghana,GHA,305.993026570029,..
+Gibraltar,GIB,..,..
+Greece,GRC,..,..
+Greenland,GRL,..,..
+Grenada,GRD,..,..
+Guam,GUM,..,..
+Guatemala,GTM,..,..
+Guinea,GIN,..,..
+Guinea-Bissau,GNB,..,..
+Guyana,GUY,..,..
+Haiti,HTI,..,..
+Honduras,HND,..,..
+"Hong Kong SAR, China",HKG,535,546
+Hungary,HUN,522,527
+Iceland,ISL,..,..
+India,IND,..,..
+Indonesia,IDN,405.612380461103,..
+"Iran, Islamic Rep.",IRN,474,456
+Iraq,IRQ,..,..
+Ireland,IRL,..,530
+Isle of Man,IMN,..,..
+Israel,ISR,516,507
+Italy,ITA,501,499
+Jamaica,JAM,..,..
+Japan,JPN,558,571
+Jordan,JOR,449,426
+Kazakhstan,KAZ,490,533
+Kenya,KEN,..,..
+Kiribati,KIR,..,..
+"Korea, Dem. People’s Rep.",PRK,..,..
+"Korea, Rep.",KOR,560,556
+Kosovo,XKX,..,..
+Kuwait,KWT,..,394
+Kyrgyz Republic,KGZ,..,..
+Lao PDR,LAO,..,..
+Latvia,LVA,..,..
+Lebanon,LBN,406,398
+Lesotho,LSO,..,..
+Liberia,LBR,..,..
+Libya,LBY,..,..
+Liechtenstein,LIE,..,..
+Lithuania,LTU,514,522
+Luxembourg,LUX,..,..
+"Macao SAR, China",MAC,..,..
+"Macedonia, FYR",MKD,407.498317940515,..
+Madagascar,MDG,..,..
+Malawi,MWI,..,..
+Malaysia,MYS,426,471
+Maldives,MDV,..,..
+Mali,MLI,..,..
+Malta,MLT,..,481
+Marshall Islands,MHL,..,..
+Mauritania,MRT,..,..
+Mauritius,MUS,..,..
+Mexico,MEX,..,..
+"Micronesia, Fed. Sts.",FSM,..,..
+Moldova,MDA,..,..
+Monaco,MCO,..,..
+Mongolia,MNG,..,..
+Montenegro,MNE,..,..
+Morocco,MAR,376,393
+Mozambique,MOZ,..,..
+Myanmar,MMR,..,..
+Namibia,NAM,..,..
+Nauru,NRU,..,..
+Nepal,NPL,..,..
+Netherlands,NLD,..,..
+New Caledonia,NCL,..,..
+New Zealand,NZL,512,513
+Nicaragua,NIC,..,..
+Niger,NER,..,..
+Nigeria,NGA,..,..
+Northern Mariana Islands,MNP,..,..
+Norway,NOR,494,489
+Oman,OMN,420,455
+Pakistan,PAK,..,..
+Palau,PLW,..,..
+Panama,PAN,..,..
+Papua New Guinea,PNG,..,..
+Paraguay,PRY,..,..
+Peru,PER,..,..
+Philippines,PHL,..,..
+Poland,POL,..,..
+Portugal,PRT,..,..
+Puerto Rico,PRI,..,..
+Qatar,QAT,419,457
+Romania,ROU,464.694502143717,..
+Russian Federation,RUS,542,544
+Rwanda,RWA,..,..
+Samoa,WSM,..,..
+San Marino,SMR,..,..
+Sao Tome and Principe,STP,..,..
+Saudi Arabia,SAU,436,396
+Senegal,SEN,..,..
+Serbia,SRB,..,..
+Seychelles,SYC,..,..
+Sierra Leone,SLE,..,..
+Singapore,SGP,590,597
+Sint Maarten (Dutch part),SXM,..,..
+Slovak Republic,SVK,..,..
+Slovenia,SVN,543,551
+Solomon Islands,SLB,..,..
+Somalia,SOM,..,..
+South Africa,ZAF,..,..
+South Sudan,SSD,..,..
+Spain,ESP,..,..
+Sri Lanka,LKA,..,..
+St. Kitts and Nevis,KNA,..,..
+St. Lucia,LCA,..,..
+St. Martin (French part),MAF,..,..
+St. Vincent and the Grenadines,VCT,..,..
+Sudan,SDN,..,..
+Suriname,SUR,..,..
+Sweden,SWE,509,522
+Switzerland,CHE,..,..
+Syrian Arab Republic,SYR,426.411504366041,..
+Tajikistan,TJK,..,..
+Tanzania,TZA,..,..
+Thailand,THA,451,456
+Timor-Leste,TLS,..,..
+Togo,TGO,..,..
+Tonga,TON,..,..
+Trinidad and Tobago,TTO,..,..
+Tunisia,TUN,438.561055324194,..
+Turkey,TUR,483,493
+Turkmenistan,TKM,..,..
+Turks and Caicos Islands,TCA,..,..
+Tuvalu,TUV,..,..
+Uganda,UGA,..,..
+Ukraine,UKR,500.991769372517,..
+United Arab Emirates,ARE,465,477
+United Kingdom,GBR,..,..
+United States,USA,525,530
+Uruguay,URY,..,..
+Uzbekistan,UZB,..,..
+Vanuatu,VUT,..,..
+"Venezuela, RB",VEN,..,..
+Vietnam,VNM,..,..
+Virgin Islands (U.S.),VIR,..,..
+West Bank and Gaza,PSE,420.454965234216,..
+"Yemen, Rep.",YEM,..,..
+Zambia,ZMB,..,..
+Zimbabwe,ZWE,..,..
