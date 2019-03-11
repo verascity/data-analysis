@@ -18,7 +18,11 @@ nsms_grads = pd.read_csv('nsms_grads.csv', na_values='..').dropna(thresh=8)
 sci_grads = stem_grads.copy()
 sci_grads.iloc[:, 2:8].add(nsms_grads.iloc[:, 2:8])
 
-early_ed_and_pisa = pd.merge(early_ed, pisa, how='inner', on=['country', 'country_code'])
-exp_and_pisa = pd.merge(exp, pisa, how='inner', on=['country', 'country_code'])
-early_ed_and_grads = pd.merge(early_ed, sci_grads, how='inner', on=['country', 'country_code'])
-exp_and_grads = pd.merge(exp, sci_grads, how='inner', on=['country', 'country_code'])
+#Creating averages:
+
+
+#Evaluating overlap:
+#early_ed_and_pisa = pd.merge(early_ed, pisa, how='inner', on=['country', 'country_code'])
+#exp_and_pisa = pd.merge(exp, pisa, how='inner', on=['country', 'country_code'])
+#early_ed_and_grads = pd.merge(early_ed, sci_grads, how='inner', on=['country', 'country_code'])
+#exp_and_grads = pd.merge(exp, sci_grads, how='inner', on=['country', 'country_code'])
