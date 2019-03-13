@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+sns.set_style('darkgrid')
 
 early_ed = pd.read_csv('net_enrollment.csv', na_values='..').dropna(thresh=8)
 exp = pd.read_csv('expenditures.csv', na_values='..').dropna(thresh=8)
@@ -42,7 +43,7 @@ exp_grads = pd.merge(exp, sci_grads, how='inner', on=['country', 'country_code']
 #No clear correlation here:
 #plt.scatter(exp_pisa['average_expenditure'], exp_pisa['average_score'])
 
-#No clear correlation:
+#Or here:
 #plt.scatter(exp_grads['average_expenditure'], exp_grads['average_grads'])
 
 '''Based on the above, expenditure doesn't seem to correlate much, but early
@@ -51,3 +52,10 @@ childhood enrollment might.'''
 ep_corr = early_pisa['average_enrollment'].corr(early_pisa['average_score'])
 eg_corr = early_grads['average_enrollment'].corr(early_grads['average_grads'])
 print(ep_corr, eg_corr) #Looks like I was wrong about that early_grads correlation.
+
+sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
+            ci=68)
+plt.xlabel('Average Net Enrollment in Pre-Primary Programs')
+plt.ylabel('Average PISA Science Score')
+plt.suptitle('Pre-Primary Enrollment vs. PISA Scores')
+plt.title('Per Country, 2009-2017')
