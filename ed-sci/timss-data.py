@@ -19,10 +19,10 @@ sci_grads = stem_grads.copy()
 sci_grads.iloc[:, 2:8].add(nsms_grads.iloc[:, 2:8])
 
 #Creating averages:
-early_ed['average'] = early_ed.mean(axis=1, skipna=True, numeric_only=True)
-exp['average'] = exp.mean(axis=1, skipna=True, numeric_only=True)
-pisa['average'] = pisa.mean(axis=1, skipna=True, numeric_only=True)
-sci_grads['average'] = sci_grads.mean(axis=1, skipna=True, numeric_only=True)
+early_ed['average_enrollment'] = early_ed.mean(axis=1, skipna=True, numeric_only=True)
+exp['average_expenditure'] = exp.mean(axis=1, skipna=True, numeric_only=True)
+pisa['average_pisa_score'] = pisa.mean(axis=1, skipna=True, numeric_only=True)
+sci_grads['average_grads'] = sci_grads.mean(axis=1, skipna=True, numeric_only=True)
 
 #Evaluating overlap:
 #early_ed_and_pisa = pd.merge(early_ed, pisa, how='inner', on=['country', 'country_code'])
