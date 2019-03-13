@@ -8,6 +8,9 @@ education boost science achievement on a global basis?
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 early_ed = pd.read_csv('net_enrollment.csv', na_values='..').dropna(thresh=8)
 exp = pd.read_csv('expenditures.csv', na_values='..').dropna(thresh=8)
@@ -21,11 +24,30 @@ sci_grads.iloc[:, 2:8].add(nsms_grads.iloc[:, 2:8])
 #Creating averages:
 early_ed['average_enrollment'] = early_ed.mean(axis=1, skipna=True, numeric_only=True)
 exp['average_expenditure'] = exp.mean(axis=1, skipna=True, numeric_only=True)
-pisa['average_pisa_score'] = pisa.mean(axis=1, skipna=True, numeric_only=True)
+pisa['average_score'] = pisa.mean(axis=1, skipna=True, numeric_only=True)
 sci_grads['average_grads'] = sci_grads.mean(axis=1, skipna=True, numeric_only=True)
 
-#Evaluating overlap:
-#early_ed_and_pisa = pd.merge(early_ed, pisa, how='inner', on=['country', 'country_code'])
-#exp_and_pisa = pd.merge(exp, pisa, how='inner', on=['country', 'country_code'])
-#early_ed_and_grads = pd.merge(early_ed, sci_grads, how='inner', on=['country', 'country_code'])
-#exp_and_grads = pd.merge(exp, sci_grads, how='inner', on=['country', 'country_code'])
+#Merging:
+early_pisa = pd.merge(early_ed, pisa, how='inner', on=['country', 'country_code'])
+exp_pisa = pd.merge(exp, pisa, how='inner', on=['country', 'country_code'])
+early_grads = pd.merge(early_ed, sci_grads, how='inner', on=['country', 'country_code'])
+exp_grads = pd.merge(exp, sci_grads, how='inner', on=['country', 'country_code'])
+
+#Possible correlation here:
+#plt.scatter(early_pisa['average_enrollment'], early_pisa['average_score'])
+
+#Another possible correlation?:
+#plt.scatter(early_grads['average_enrollment'], early_grads['average_grads'])
+
+#No clear correlation here:
+#plt.scatter(exp_pisa['average_expenditure'], exp_pisa['average_score'])
+
+#No clear correlation:
+#plt.scatter(exp_grads['average_expenditure'], exp_grads['average_grads'])
+
+'''Based on the above, expenditure doesn't seem to correlate much, but early
+childhood enrollment might.'''
+
+ep_corr = early_pisa['average_enrollment'].corr(early_pisa['average_score'])
+eg_corr = early_grads['average_enrollment'].corr(early_grads['average_grads'])
+print(ep_corr, eg_corr) #Looks like I was wrong about that early_grads correlation.
