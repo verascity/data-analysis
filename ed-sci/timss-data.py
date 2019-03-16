@@ -10,6 +10,7 @@ education boost science achievement on a global basis?
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import linregress 
 
 sns.set_style('darkgrid')
 
@@ -51,11 +52,17 @@ childhood enrollment might.'''
 
 ep_corr = early_pisa['average_enrollment'].corr(early_pisa['average_score'])
 eg_corr = early_grads['average_enrollment'].corr(early_grads['average_grads'])
-print(ep_corr, eg_corr) #Looks like I was wrong about that early_grads correlation.
+#print(ep_corr, eg_corr) #Looks like I was wrong about that early_grads correlation.
 
-sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
-            ci=68)
+slope, intercept, r_value, p_value, std_err = linregress(early_pisa['average_enrollment'],
+                                                         early_pisa['average_score'])
+
+print(r_value, p_value, r_value**2)
+
+ax = sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
+            line_kws = {'label':'r={0:.2f}, p={1:.2f}, r^2={2:.2f}'.format(r_value,p_value,r_value**2)})
+ax.legend()
 plt.xlabel('Average Net Enrollment in Pre-Primary Programs')
 plt.ylabel('Average PISA Science Score')
-plt.suptitle('Pre-Primary Enrollment vs. PISA Scores')
-plt.title('Per Country, 2009-2017')
+plt.suptitle('Pre-Primary Enrollment vs. PISA Scores \n')
+plt.title('(Per Country, 2009-2017)')
