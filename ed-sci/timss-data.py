@@ -59,10 +59,17 @@ slope, intercept, r_value, p_value, std_err = linregress(early_pisa['average_enr
 
 print(r_value, p_value, r_value**2)
 
-ax = sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
-            line_kws = {'label':'r={0:.2f}, p={1:.2f}, r^2={2:.2f}'.format(r_value,p_value,r_value**2)})
-ax.legend()
-plt.xlabel('Average Net Enrollment in Pre-Primary Programs')
-plt.ylabel('Average PISA Science Score')
-plt.suptitle('Pre-Primary Enrollment vs. PISA Scores \n')
-plt.title('(Per Country, 2009-2017)')
+#ax = sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
+#            line_kws = {'label':'r={0:.2f}, p={1:.2f}, r^2={2:.2f}'
+#                         .format(r_value,p_value,r_value**2)})
+#ax.legend()
+#plt.xlabel('Average Net Enrollment in Pre-Primary Programs')
+#plt.ylabel('Average PISA Science Score')
+#plt.suptitle('Pre-Primary Enrollment vs. PISA Scores \n')
+#plt.title('(Per Country, 2009-2017)')
+
+early_pisa_exp = pd.merge(early_pisa, exp[['country', 'average_expenditure']],
+                      how='inner', on='country')
+
+early_pisa_exp['exp_bins'] = pd.qcut(early_pisa_exp['average_expenditure'], 3, 
+              precision=2, labels=['low', 'middle', 'high'])
