@@ -54,19 +54,29 @@ ep_corr = early_pisa['average_enrollment'].corr(early_pisa['average_score'])
 eg_corr = early_grads['average_enrollment'].corr(early_grads['average_grads'])
 #print(ep_corr, eg_corr) #Looks like I was wrong about that early_grads correlation.
 
+plt.figure(1)
+ax1 = sns.regplot(x='average_enrollment', y='average_grads', data=early_grads,
+                  line_kws = {'label':'r={0:.2f}'.format(eg_corr)})
+ax1.legend()
+plt.xlabel('Average Pre-K Enrollment')
+plt.ylabel('Average % of Science Grads')
+plt.suptitle('Pre-K Enrollment vs. Science Graduates \n')
+plt.title('(Per Country, 2009-2017)')
+
 slope, intercept, r_value, p_value, std_err = linregress(early_pisa['average_enrollment'],
                                                          early_pisa['average_score'])
 
 print(r_value, p_value, r_value**2)
 
-#ax = sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
-#            line_kws = {'label':'r={0:.2f}, p={1:.2f}, r^2={2:.2f}'
-#                         .format(r_value,p_value,r_value**2)})
-#ax.legend()
-#plt.xlabel('Average Net Enrollment in Pre-Primary Programs')
-#plt.ylabel('Average PISA Science Score')
-#plt.suptitle('Pre-Primary Enrollment vs. PISA Scores \n')
-#plt.title('(Per Country, 2009-2017)')
+plt.figure(2)
+ax2 = sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
+            line_kws = {'label':'r={0:.2f}, p={1:.2f}, r^2={2:.2f}'
+                         .format(r_value,p_value,r_value**2)})
+ax2.legend()
+plt.xlabel('Average Pre-K Enrollment')
+plt.ylabel('Average PISA Science Score')
+plt.suptitle('Pre-Primary Enrollment vs. PISA Scores \n')
+plt.title('(Per Country, 2009-2017)')
 
 early_pisa_exp = pd.merge(early_pisa, exp[['country', 'average_expenditure']],
                       how='inner', on='country')
@@ -75,7 +85,7 @@ early_pisa_exp['exp_bins'] = pd.qcut(early_pisa_exp['average_expenditure'], 3,
               precision=2, labels=['Low', 'Medium', 'High'])
 
 g = sns.lmplot(x='average_enrollment', y='average_score', col='exp_bins', hue='exp_bins',
-           data=early_pisa_exp)
+           data=early_pisa_exp, fit_reg=False)
 g = (g.set_titles("{col_name} Expenditure")
     .set_axis_labels('Average Enrollment', 'Average Score')
     .fig.subplots_adjust(wspace=0.01))
