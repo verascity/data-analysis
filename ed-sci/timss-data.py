@@ -54,29 +54,32 @@ ep_corr = early_pisa['average_enrollment'].corr(early_pisa['average_score'])
 eg_corr = early_grads['average_enrollment'].corr(early_grads['average_grads'])
 #print(ep_corr, eg_corr) #Looks like I was wrong about that early_grads correlation.
 
-plt.figure(1)
-ax1 = sns.regplot(x='average_enrollment', y='average_grads', data=early_grads,
-                  line_kws = {'label':'r={0:.2f}'.format(eg_corr)})
-ax1.legend()
-plt.xlabel('Average Pre-K Enrollment')
-plt.ylabel('Average % of Science Grads')
-plt.suptitle('Pre-K Enrollment vs. Science Graduates \n')
-plt.title('(Per Country, 2009-2017)')
+slope, intercept, r_1, p_1, std_err = linregress(early_grads['average_enrollment'],
+                                                         early_grads['average_grads'])
 
-slope, intercept, r_value, p_value, std_err = linregress(early_pisa['average_enrollment'],
+plt.figure(1, figsize=(9, 6))
+ax1 = sns.regplot(x='average_enrollment', y='average_grads', data=early_grads,
+                  line_kws = {'label':'r={0:.2f}, p={1:.2f}'.format(r_1, p_1)})
+ax1.legend()
+plt.xlabel('Average Pre-K Enrollment', fontsize=16)
+plt.ylabel('Average % of Total College Graduates', fontsize=16)
+plt.suptitle('Pre-K Enrollment vs. Science Graduates \n (Per Country, 2009-2017)',
+                                                         fontsize=18)
+plt.savefig('early_ed_grads.png', format='png')
+
+slope, intercept, r_2, p_2, std_err = linregress(early_pisa['average_enrollment'],
                                                          early_pisa['average_score'])
 
-print(r_value, p_value, r_value**2)
-
-plt.figure(2)
+plt.figure(2, figsize=(9, 6))
 ax2 = sns.regplot(x='average_enrollment', y='average_score', data=early_pisa, 
             line_kws = {'label':'r={0:.2f}, p={1:.2f}, r^2={2:.2f}'
-                         .format(r_value,p_value,r_value**2)})
+                         .format(r_2,p_2,r_2**2)})
 ax2.legend()
-plt.xlabel('Average Pre-K Enrollment')
-plt.ylabel('Average PISA Science Score')
-plt.suptitle('Pre-Primary Enrollment vs. PISA Scores \n')
-plt.title('(Per Country, 2009-2017)')
+plt.xlabel('Average Pre-K Enrollment', fontsize=16)
+plt.ylabel('Average PISA Score', fontsize=16)
+plt.suptitle('Pre-K Enrollment vs. PISA Science Scores \n (Per Country, 2009-2017)',
+             fontsize=18)
+plt.savefig('early_ed_pisa.png', format='png')
 
 early_pisa_exp = pd.merge(early_pisa, exp[['country', 'average_expenditure']],
                       how='inner', on='country')
