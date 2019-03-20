@@ -85,10 +85,13 @@ early_pisa_exp = pd.merge(early_pisa, exp[['country', 'average_expenditure']],
                       how='inner', on='country')
 
 early_pisa_exp['exp_bins'] = pd.qcut(early_pisa_exp['average_expenditure'], 3, 
-              precision=2, labels=['Low', 'Medium', 'High'])
+              precision=2, labels=['Low', 'Moderate', 'High'])
 
-g = sns.lmplot(x='average_enrollment', y='average_score', col='exp_bins', hue='exp_bins',
+with sns.plotting_context(context='notebook', font_scale=1.3):
+    g = sns.lmplot(x='average_enrollment', y='average_score', col='exp_bins', hue='exp_bins',
            data=early_pisa_exp, fit_reg=False)
-g = (g.set_titles("{col_name} Expenditure")
-    .set_axis_labels('Average Enrollment', 'Average Score')
-    .fig.subplots_adjust(wspace=0.01))
+    g = (g.set_titles("{col_name} Spending")
+    .set_axis_labels('Average Enrollment', 'Average Score'))
+    plt.suptitle('Enrollment vs. Scores, by Level of Government Spending',
+             fontsize=18, x=0.5, y=1.1)
+    plt.savefig('ed_grads_exp.png', format='png')
