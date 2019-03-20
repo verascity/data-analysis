@@ -81,7 +81,10 @@ plt.suptitle('Pre-K Enrollment vs. PISA Science Scores \n (Per Country, 2009-201
              fontsize=18)
 plt.savefig('early_ed_pisa.png', format='png')
 
-early_pisa_exp = pd.merge(early_pisa, exp[['country', 'average_expenditure']],
+early_ed_top = early_ed[early_ed['average_enrollment'] > 50.0]
+early_pisa_top = pd.merge(early_ed_top, pisa, how='inner', on=['country', 'country_code'])
+
+early_pisa_exp = pd.merge(early_pisa_top, exp[['country', 'average_expenditure']],
                       how='inner', on='country')
 
 early_pisa_exp['exp_bins'] = pd.qcut(early_pisa_exp['average_expenditure'], 3, 
@@ -89,7 +92,7 @@ early_pisa_exp['exp_bins'] = pd.qcut(early_pisa_exp['average_expenditure'], 3,
 
 with sns.plotting_context(context='notebook', font_scale=1.3):
     g = sns.lmplot(x='average_enrollment', y='average_score', col='exp_bins', hue='exp_bins',
-           data=early_pisa_exp, fit_reg=False)
+           data=early_pisa_exp, fit_reg=True)
     g = (g.set_titles("{col_name} Spending")
     .set_axis_labels('Average Enrollment', 'Average Score'))
     plt.suptitle('Enrollment vs. Scores, by Level of Government Spending',
