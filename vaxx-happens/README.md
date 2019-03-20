@@ -1,4 +1,4 @@
-# Vaxx Happens!
+# Vaccination Happens!
 
 Is the debate on vaccines shifting over time? Is either side giving or losing ground? Or are things truly static?
 
