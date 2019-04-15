@@ -54,6 +54,6 @@ if __name__ == "__main__":
     X_train_counts = cvec.fit_transform(X_train)
     tfidf_t = TfidfTransformer(use_idf=True)
     X_train_tfidf = tfidf_t.fit_transform(X_train_counts)
-    clf = MultinomialNB().fit(X_train_tfidf, y_train)
+    clf = MultinomialNB().fit(X_train_counts, y_train)
     y_pred = clf.predict(cvec.transform(X_test))
     print(accuracy_score(y_test, y_pred))
