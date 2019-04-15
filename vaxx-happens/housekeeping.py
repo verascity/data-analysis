@@ -9,3 +9,6 @@ import pandas as pd
 
 df1 = pd.read_csv('vaccine_df_01312019.csv')
 df2 = pd.read_csv('vaccine_df_02242019.csv')
+df1.columns = ['id', 'text', 'status']
+
+vaccine_df = pd.concat([df1, df2])
