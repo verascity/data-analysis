@@ -2,7 +2,10 @@
 """
 Created on Sun Apr 14 20:18:24 2019
 
-@author: svsti
+@author: verascity
+
+This is a little housekeeping script while I work out the kinks on this 
+classifier; it will eventually go away!
 """
 
 import pandas as pd
