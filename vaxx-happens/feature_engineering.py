@@ -10,6 +10,7 @@ that dataframe.
 """
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 df1 = pd.read_csv('vaccine_df_01312019.csv')
 df2 = pd.read_csv('vaccine_df_02242019.csv')
@@ -20,3 +21,5 @@ vaccine_df = pd.concat([df1, df2])
 vaccine_df['hashtags'] = vaccine_df.text.str.count('#')
 vaccine_df['pings'] = vaccine_df.text.str.count('@')
 
+#plt.scatter(vaccine_df.status, vaccine_df.hashtags)
+plt.scatter(vaccine_df.status, vaccine_df.pings)
