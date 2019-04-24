@@ -21,5 +21,11 @@ vaccine_df = pd.concat([df1, df2])
 vaccine_df['hashtags'] = vaccine_df.text.str.count('#')
 vaccine_df['pings'] = vaccine_df.text.str.count('@')
 
+#Eliminating outliers -- only one or two accounts are really throwing this off:
+vaccine_df = vaccine_df[vaccine_df.hashtags <= 20]
+vaccine_df = vaccine_df[vaccine_df.pings <= 20]
+
+
 #plt.scatter(vaccine_df.status, vaccine_df.hashtags)
 plt.scatter(vaccine_df.status, vaccine_df.pings)
+
