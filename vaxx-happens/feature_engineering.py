@@ -11,6 +11,7 @@ that dataframe.
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 df1 = pd.read_csv('vaccine_df_01312019.csv')
 df2 = pd.read_csv('vaccine_df_02242019.csv')
@@ -26,6 +27,10 @@ vaccine_df = vaccine_df[vaccine_df.hashtags <= 20]
 vaccine_df = vaccine_df[vaccine_df.pings <= 20]
 
 
-#plt.scatter(vaccine_df.status, vaccine_df.hashtags)
-plt.scatter(vaccine_df.status, vaccine_df.pings)
+#plt.bar(vaccine_df.status, vaccine_df.hashtags)
+#plt.bar(vaccine_df.status, vaccine_df.pings)
 
+vaccine_df_limited = vaccine_df[(vaccine_df.status == 'Pro') | 
+        (vaccine_df.status == 'Anti')]
+
+ax = sns.boxplot(vaccine_df_limited.status, vaccine_df_limited.pings)
