@@ -4,7 +4,7 @@
 
 This module contains functions for use with Tweepy and the Twitter API. It 
 will gather tweets from the previous 7 days about a topic, optionally from a
-specific location, and save relevant information in a .json file. It then 
+specific location, and save relevant information as a JSON string. It then 
 loads the json file into a Pandas dataframe.
 
 """
@@ -41,9 +41,9 @@ def api_setup():
     return api
 
 if __name__ == "__main__":
-#    vaccine_dict = dict_from_api('vaccine -filter:retweets', 
-#                    geocode='49.282729,-123.120738,300mi')
+    vaccine_dict = dict_from_api('vaccine -filter:retweets', 
+                    geocode='49.282729,-123.120738,300mi')
     vaccine_df = pd.DataFrame.from_dict(vaccine_dict, orient='index')
-    vaccine_df.columns = ['text']
-    vaccine_df['status'] = ' '
-    vaccine_df.to_csv('vaccine_df_02242019.csv')
+#    vaccine_df.columns = ['text']
+#    vaccine_df['status'] = ' '
+#    vaccine_df.to_csv('vaccine_df_02242019.csv')
