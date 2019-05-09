@@ -45,3 +45,7 @@ def api_setup():
 if __name__ == "__main__":
     vaccine_df = df_from_api('vaccine -filter:retweets', 
                     geocode='40.6617743,-73.9710957,300mi')
+    columns = ['created_at', 'id_str', 'full_text', 'entities',
+               'in_reply_to_user_id_str', 'in_reply_to_screen_name',
+               'user', 'is_quote_status', 'retweet_count', 'favorite_count']
+    vaccine_df = vaccine_df[columns]
