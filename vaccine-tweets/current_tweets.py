@@ -15,7 +15,7 @@ import credentials
 
 pd.set_option('display.max_colwidth', -1)
 
-def dict_from_api(query, geocode=None, limit=1000):
+def dict_from_api(query, geocode=None, limit=3):
     
     tweet_dict = {}
     for tweet in tweepy.Cursor(api_setup().search, q=query, 
@@ -23,7 +23,7 @@ def dict_from_api(query, geocode=None, limit=1000):
     geocode=geocode).items(limit):
         
         try: 
-            tweet_dict[tweet.id_str] = tweet.full_text
+            tweet_dict[tweet.id_str] = tweet._json
         except tweepy.TweepError as err:
             print(err.api_code)
         
@@ -42,7 +42,7 @@ def api_setup():
 
 if __name__ == "__main__":
     vaccine_dict = dict_from_api('vaccine -filter:retweets', 
-                    geocode='49.282729,-123.120738,300mi')
+                    geocode='40.6617743,-73.9710957,300mi')
     vaccine_df = pd.DataFrame.from_dict(vaccine_dict, orient='index')
 #    vaccine_df.columns = ['text']
 #    vaccine_df['status'] = ' '
