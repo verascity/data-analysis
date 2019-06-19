@@ -15,7 +15,7 @@ import credentials
 
 pd.set_option('display.max_colwidth', -1)
 
-def df_from_api(query, geocode=None, limit=5):
+def df_from_api(query, geocode=None, limit=25):
     
     tweet_dict = {}
     for tweet in tweepy.Cursor(api_setup().search, q=query, 
@@ -43,9 +43,11 @@ def api_setup():
     return api
 
 if __name__ == "__main__":
-    vaccine_df = df_from_api('vaccine -filter:retweets', 
-                    geocode='40.6617743,-73.9710957,300mi')
-    columns = ['created_at', 'id_str', 'full_text', 'entities',
-               'in_reply_to_user_id_str', 'in_reply_to_screen_name',
-               'user', 'is_quote_status', 'retweet_count', 'favorite_count']
-    vaccine_df = vaccine_df[columns]
+#    vaccine_df = df_from_api('vaccine -filter:retweets', 
+#                    geocode='40.6617743,-73.9710957,300mi')
+#    columns = ['created_at', 'id_str', 'full_text', 'entities',
+#               'in_reply_to_user_id_str', 'in_reply_to_screen_name',
+#               'user', 'is_quote_status', 'retweet_count', 'favorite_count']
+#    vaccine_df = vaccine_df[columns]
+    user_df = vaccine_df['user'].apply(pd.Series)
+    ent_df = vaccine_df['entities'].apply(pd.Series)
