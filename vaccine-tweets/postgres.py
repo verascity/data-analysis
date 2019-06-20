@@ -9,6 +9,7 @@ collected from current_tweets' Twitter scraper.
 """
 
 import psycopg2
+import credentials as cd
 
 
 def get_connection(dbname, host='localhost', user='user', password='password'):
