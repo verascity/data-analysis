@@ -18,3 +18,16 @@ def get_connection(dbname, host='localhost', user='user', password='password'):
 
     return psycopg2.connect(connect_str)
 
+
+
+con = get_connection(cd.PGDATABASE, user=cd.PGUSER, password=cd.PGPASSWORD, 
+                     host=cd.PGHOST)  
+print("Database opened successfully")
+
+cur = con.cursor()  
+cur.execute('''CREATE SCHEMA IF NOT EXISTS tweets;''')
+print("Schema created successfully")
+
+con.commit()  
+con.close() 
+
